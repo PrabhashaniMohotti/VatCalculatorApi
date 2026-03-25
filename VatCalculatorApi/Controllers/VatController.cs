@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using VatCalculatorApi.Models;
+using VatCalculatorApi.Services;
 using VatCalculatorApi.Validators;
 
 namespace VatCalculatorApi.Controllers
@@ -15,7 +16,8 @@ namespace VatCalculatorApi.Controllers
             if (error != null)
                 return BadRequest(new ErrorResponse("Validation Failed", error));
 
-            return Ok(null);
+            var result = VatService.Calculate(vatRequest);
+            return Ok(result);
         }
     }
 }
